@@ -18,10 +18,7 @@ document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 // ---- Live download counter (GitHub Releases API) ----
 const REPO = "nej296/hhsimulator-site";
 const ASSET_MATCH = /HH-Simulator-Setup\.exe$/i;
-const targets = [
-  document.getElementById("counter-num"),
-  document.getElementById("counter-num-2"),
-];
+const targets = [document.getElementById("counter-num")];
 
 function animateTo(el, value) {
   if (!el) return;

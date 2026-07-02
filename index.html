@@ -17,149 +17,38 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="scan-overlay" aria-hidden="true"></div>
-
   <header class="site-header">
     <a class="wordmark" href="#top">
       <img class="wordmark-logo" src="assets/logo.png" alt="HH Simulator logo" width="30" height="30" />
       <span>HH&nbsp;Simulator</span>
     </a>
     <nav class="site-nav">
-      <a href="#overview">Overview</a>
-      <a href="#features">Features</a>
-      <a href="#download">Download</a>
-      <a class="nav-github" href="https://github.com/nej296/hhsimulator-site" target="_blank" rel="noopener">GitHub</a>
+      <a class="nav-github" href="https://github.com/nej296/hhsimulator-site" target="_blank" rel="noopener">Source Code</a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero">
-      <div class="hero-copy reveal">
-        <span class="eyebrow">Computational Neuroscience · Desktop Application</span>
-        <h1>Hodgkin-Huxley<br />Simulator</h1>
-        <p class="lede">
-          An interactive desktop app for exploring single-compartment
-          Hodgkin-Huxley membrane dynamics. Inject current, watch action
-          potentials emerge in real time, and dissect the ionic conductances
-          and gating variables behind every spike.
-        </p>
-        <div class="hero-actions">
-          <a class="btn-primary" href="#download">
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Download the Windows Installer
-          </a>
-          <div class="counter" id="download-counter" title="Total installer downloads">
-            <span class="counter-num" id="counter-num">—</span>
-            <span class="counter-label">downloads</span>
-          </div>
-        </div>
-        <p class="hero-meta">Version 1.0.0 · Windows 10 / 11 (64-bit) · ~29 MB · No Python required</p>
-      </div>
+      <h1 class="reveal">Hodgkin-Huxley Simulator</h1>
+      <p class="lede reveal" style="--delay:80ms">
+        An interactive desktop app for exploring single-compartment
+        Hodgkin-Huxley membrane dynamics. Inject current, watch action
+        potentials emerge in real time, and dissect the ionic conductances
+        and gating variables behind every spike.
+      </p>
 
-      <figure class="hero-figure reveal" style="--delay:120ms">
-        <div class="window-frame">
-          <div class="window-bar">
-            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <span class="window-title">HH Simulator — Simulation Output</span>
-          </div>
-          <img src="assets/hero-composite.png" alt="Hodgkin-Huxley simulation output: membrane potential, injected current, ionic conductances, and gating variables." />
-        </div>
+      <figure class="hero-figure reveal" style="--delay:160ms">
+        <img src="assets/software.png" alt="The Hodgkin-Huxley Simulator running: voltage, injected current, net ionic current, conductances, and gating-variable graphs alongside the control hub and parameters panel." />
       </figure>
-    </section>
 
-    <section id="overview" class="strip">
-      <div class="strip-inner reveal">
-        <p class="strip-lead">
-          Built on a fourth-order Runge-Kutta integration of the classic 1952
-          Hodgkin-Huxley equations — the same model that earned the Nobel Prize
-          for explaining how neurons fire.
-        </p>
-        <div class="stat-row">
-          <div class="stat"><span class="stat-num">RK4</span><span class="stat-cap">numerical integrator</span></div>
-          <div class="stat"><span class="stat-num">5</span><span class="stat-cap">live signal views</span></div>
-          <div class="stat"><span class="stat-num">0.01<span class="unit">ms</span></span><span class="stat-cap">default time step</span></div>
-          <div class="stat"><span class="stat-num">CSV</span><span class="stat-cap">data export</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="features" class="features">
-      <div class="section-head reveal">
-        <span class="eyebrow">What it does</span>
-        <h2>Everything the classic model, made tangible.</h2>
-      </div>
-      <div class="feature-grid">
-        <article class="feature-card reveal">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22"><polyline points="2,16 7,16 10,5 13,21 16,11 19,16 22,16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Action potentials in real time</h3>
-          <p>Drive the membrane with step currents or multi-pulse protocols and watch spikes, refractory periods, and firing rates emerge.</p>
-        </article>
-        <article class="feature-card reveal" style="--delay:80ms">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 12c2-6 6-6 8 0s6 6 8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Ionic conductances</h3>
-          <p>Track sodium and potassium conductances as they open and close, alongside the net ionic current shaping each spike.</p>
-        </article>
-        <article class="feature-card reveal" style="--delay:160ms">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Gating variables</h3>
-          <p>Visualize the m, h, and n gating probabilities — the hidden state machine that controls when channels conduct.</p>
-        </article>
-        <article class="feature-card reveal" style="--delay:240ms">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M6 3h9l3 3v15H6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12h6M9 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Tune every parameter</h3>
-          <p>Adjust conductances, reversal potentials, capacitance, and stimulus timing — then export the full time series to CSV.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="showcase">
-      <div class="showcase-inner">
-        <div class="showcase-copy reveal">
-          <span class="eyebrow">The interface</span>
-          <h2>A focused hub, not a wall of dials.</h2>
-          <p>
-            The app opens to a clean control hub. Open the parameters panel to
-            shape a stimulus, then pop out any of the five graph windows —
-            voltage, injected current, net ionic current, conductances, and
-            gating states — each with pan, zoom, and point-tracing tools.
-          </p>
-        </div>
-        <figure class="showcase-figure reveal" style="--delay:120ms">
-          <div class="window-frame compact">
-            <div class="window-bar">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span class="window-title">HH Simulator</span>
-            </div>
-            <img src="assets/app-hub.png" alt="The Hodgkin-Huxley Simulator control hub with Parameters, Graphs, Save Plots, and Help." />
-          </div>
-        </figure>
-      </div>
-    </section>
-
-    <section id="download" class="download">
-      <div class="download-card reveal">
-        <span class="eyebrow">Download</span>
-        <h2>Run it on your machine in one click.</h2>
-        <p class="download-sub">
-          No Python, no terminal, no setup. Download the installer, run it, and
-          the simulator installs like any Windows program — with a Start&nbsp;Menu
-          shortcut and a clean uninstaller.
-        </p>
-        <a class="btn-primary btn-lg" id="download-btn" href="https://github.com/nej296/hhsimulator-site/releases/latest/download/HH-Simulator-Setup.exe">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="download reveal" style="--delay:240ms">
+        <a class="btn-primary" id="download-btn" href="https://github.com/nej296/hhsimulator-site/releases/latest/download/HH-Simulator-Setup.exe">
+          <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Download the Windows Installer
         </a>
         <div class="download-stats">
-          <div class="counter counter-lg" title="Total installer downloads">
-            <span class="counter-num" id="counter-num-2">—</span>
+          <div class="counter" title="Total installer downloads">
+            <span class="counter-num" id="counter-num">—</span>
             <span class="counter-label">total downloads</span>
           </div>
           <span class="download-meta">v1.0.0 · Windows 10 / 11 (64-bit) · ~29 MB</span>
@@ -173,17 +62,11 @@
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img class="wordmark-logo" src="assets/logo.png" alt="" width="26" height="26" aria-hidden="true" />
-        <span>Hodgkin-Huxley Simulator</span>
-      </div>
-      <div class="footer-contact">
-        <a href="mailto:njohns59@gmu.edu">njohns59@gmu.edu</a>
-        <span class="footer-loc">George Mason University</span>
-      </div>
+    <p class="footer-prompt">For more information, please reach out at:</p>
+    <div class="footer-contact">
+      <a href="mailto:njohns59@gmu.edu">njohns59@gmu.edu</a>
+      <span class="footer-loc">George Mason University</span>
     </div>
-    <div class="footer-fine">© <span id="year"></span> Nicholas Johnson · Built with Python, NumPy &amp; matplotlib</div>
   </footer>
 
   <script src="script.js"></script>
