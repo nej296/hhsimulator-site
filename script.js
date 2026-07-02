@@ -1,6 +1,3 @@
-// ---- Footer year ----
-document.getElementById("year").textContent = new Date().getFullYear();
-
 // ---- Reveal on scroll ----
 const io = new IntersectionObserver(
   (entries) => {
@@ -14,6 +11,14 @@ const io = new IntersectionObserver(
   { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
 );
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+// Safety net: guarantee everything is visible shortly after load, even if the
+// observer never fires for an element.
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.querySelectorAll(".reveal:not(.in)").forEach((el) => el.classList.add("in"));
+  }, 700);
+});
 
 // ---- Live download counter (GitHub Releases API) ----
 const REPO = "nej296/hhsimulator-site";
