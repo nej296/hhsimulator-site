@@ -117,6 +117,37 @@ main { flex: 1 0 auto; display: flex; }
 }
 .btn:active { transform: translateY(0); }
 
+/* ---------------- macOS one-step install panel ---------------- */
+.mac-help {
+  width: 100%; max-width: 560px;
+  background: #f8fafc; border: 1px solid var(--line);
+  border-radius: 14px; padding: 16px 18px;
+  text-align: left;
+}
+.mac-help[hidden] { display: none; }
+.mac-help-title { margin: 0 0 4px; font-weight: 700; font-size: 1rem; color: var(--ink); }
+.mac-help-sub { margin: 0 0 12px; font-size: .88rem; color: var(--ink-soft); }
+.mac-cmd {
+  display: flex; align-items: stretch; gap: 8px;
+  background: #0f172a; border-radius: 9px; padding: 4px 4px 4px 12px;
+}
+.mac-cmd code {
+  flex: 1; align-self: center;
+  font-family: var(--font-mono); font-size: .82rem; color: #e2e8f0;
+  overflow-x: auto; white-space: nowrap;
+}
+.mac-copy {
+  flex-shrink: 0; border: none; cursor: pointer;
+  background: var(--accent); color: #fff; font-weight: 600; font-size: .82rem;
+  padding: 8px 14px; border-radius: 7px; font-family: var(--font-body);
+  transition: background .18s ease;
+}
+.mac-copy:hover { background: var(--accent-deep); }
+.mac-copy.copied { background: #16a34a; }
+.mac-help-alt { margin: 12px 0 0; font-size: .82rem; color: var(--muted); }
+.mac-help-alt a { color: var(--accent); font-weight: 600; }
+.mac-help-alt a:hover { text-decoration: underline; }
+
 .download-stats { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; justify-content: center; }
 .counter { display: inline-flex; flex-direction: column; align-items: center; line-height: 1; }
 .counter-num {

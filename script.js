@@ -95,10 +95,50 @@ async function registerDownload() {
   }
 }
 
-document.querySelectorAll(".dl-btn").forEach((btn) => {
-  // The link still navigates to the release asset normally; we just record the
-  // download alongside it. Fire-and-forget so the download is never delayed.
+// Direct download links (Windows, Linux, and the macOS .zip fallback) navigate
+// to the release asset normally; we just record the download alongside it.
+document.querySelectorAll("a.dl-btn").forEach((btn) => {
   btn.addEventListener("click", () => { registerDownload(); });
 });
+
+// macOS: the button reveals a one-step Terminal install instead of a browser
+// download, because browser-downloaded apps are quarantined by macOS while
+// curl-fetched ones are not — so this install runs with no security warning.
+const macBtn = document.getElementById("mac-btn");
+const macHelp = document.getElementById("mac-help");
+if (macBtn && macHelp) {
+  macBtn.addEventListener("click", () => {
+    const willOpen = macHelp.hasAttribute("hidden");
+    if (willOpen) macHelp.removeAttribute("hidden");
+    else macHelp.setAttribute("hidden", "");
+    macBtn.setAttribute("aria-expanded", String(willOpen));
+  });
+}
+
+const macCopy = document.getElementById("mac-copy");
+const macCmd = document.getElementById("mac-cmd-text");
+if (macCopy && macCmd) {
+  macCopy.addEventListener("click", async () => {
+    const text = macCmd.textContent.trim();
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (_) {
+      const range = document.createRange();
+      range.selectNodeContents(macCmd);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      try { document.execCommand("copy"); } catch (e) {}
+      sel.removeAllRanges();
+    }
+    macCopy.textContent = "Copied!";
+    macCopy.classList.add("copied");
+    registerDownload();
+    setTimeout(() => {
+      macCopy.textContent = "Copy";
+      macCopy.classList.remove("copied");
+    }, 1800);
+  });
+}
 
 loadDownloadCount();
