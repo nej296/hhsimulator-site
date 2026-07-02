@@ -1,0 +1,8 @@
+# Large binary is distributed via GitHub Releases, not committed to the repo
+downloads/*.exe
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vercel
+node_modules/
