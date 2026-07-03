@@ -101,17 +101,17 @@ document.querySelectorAll("a.dl-btn").forEach((btn) => {
   btn.addEventListener("click", () => { registerDownload(); });
 });
 
-// macOS: the button reveals a one-step Terminal install instead of a browser
-// download, because browser-downloaded apps are quarantined by macOS while
-// curl-fetched ones are not — so this install runs with no security warning.
-const macBtn = document.getElementById("mac-btn");
+// macOS: the button downloads the .dmg directly. A small "Opening it on a Mac?"
+// link reveals how to get past Gatekeeper (right-click → Open), plus a
+// zero-warning Terminal install for anyone who prefers it.
+const macToggle = document.getElementById("mac-note-toggle");
 const macHelp = document.getElementById("mac-help");
-if (macBtn && macHelp) {
-  macBtn.addEventListener("click", () => {
+if (macToggle && macHelp) {
+  macToggle.addEventListener("click", () => {
     const willOpen = macHelp.hasAttribute("hidden");
     if (willOpen) macHelp.removeAttribute("hidden");
     else macHelp.setAttribute("hidden", "");
-    macBtn.setAttribute("aria-expanded", String(willOpen));
+    macToggle.setAttribute("aria-expanded", String(willOpen));
   });
 }
 

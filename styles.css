@@ -117,7 +117,19 @@ main { flex: 1 0 auto; display: flex; }
 }
 .btn:active { transform: translateY(0); }
 
-/* ---------------- macOS one-step install panel ---------------- */
+/* ---------------- macOS help ---------------- */
+.mac-note-toggle {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-body); font-size: .9rem; color: var(--muted);
+  padding: 2px 4px; text-decoration: underline; text-underline-offset: 3px;
+  transition: color .18s ease;
+}
+.mac-note-toggle:hover { color: var(--accent); }
+.mac-steps {
+  margin: 0 0 12px; padding-left: 20px;
+  font-size: .9rem; color: var(--ink-soft); line-height: 1.5;
+}
+.mac-steps li { margin: 2px 0; }
 .mac-help {
   width: 100%; max-width: 560px;
   background: #f8fafc; border: 1px solid var(--line);
