@@ -134,7 +134,10 @@ async function registerDownload() {
   // Optimistically mark this computer so rapid repeat clicks can't double-count.
   try { localStorage.setItem(COUNTED_FLAG, "1"); } catch (_) {}
   try {
-    const res = await fetch(`${COUNTER_BASE}/hit/${COUNTER_NS}/${COUNTER_KEY}`);
+    // keepalive lets the request finish even though clicking the download link
+    // may start a navigation/download in the same instant — so the count is not
+    // lost. This fires for Windows, macOS AND Linux clicks alike.
+    const res = await fetch(`${COUNTER_BASE}/hit/${COUNTER_NS}/${COUNTER_KEY}`, { keepalive: true });
     if (!res.ok) throw new Error("counter HIT " + res.status);
     const data = await res.json();
     if (typeof data.value === "number") showCount(data.value);
