@@ -53,34 +53,33 @@ a { color: inherit; text-decoration: none; }
 .nav-github:hover { border-color: var(--accent); color: var(--accent); }
 
 /* ---------------- Hero ----------------
-   The hero fills the viewport below the header so the header, title,
-   screenshot, download buttons and the "total downloads" counter are all
-   visible without scrolling on 1080p and 1440p displays. The footer sits
-   just past the fold, so it takes only a small scroll to reach. */
-main { flex: 1 0 auto; display: flex; }
+   The hero is a FIXED-size design that script.js scales uniformly to fit the
+   viewport (transform: scale). That keeps the layout identical at every monitor
+   resolution — it never reflows or changes proportion, it just scales as a whole
+   so the whole hero (title through the download counter) always fits on screen. */
+main { flex: 1 0 auto; display: flex; align-items: center; justify-content: center; }
+.stage { transform-origin: top left; }   /* JS sets width/height to the scaled box */
 .hero {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: clamp(6px, 1.4vh, 18px) clamp(20px, 5vw, 52px) clamp(14px, 2vh, 26px);
-  min-height: calc(100vh - var(--header-h));
-  min-height: calc(100dvh - var(--header-h));
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 1000px;
+  padding: 8px 40px 20px;
+  transform-origin: top left;   /* JS sets transform: scale(s) */
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
   text-align: center;
-  gap: clamp(10px, 1.6vh, 20px);
+  gap: 20px;
 }
 .hero h1 {
   font-family: var(--font-display); font-weight: 600;
-  font-size: clamp(2.28rem, 5.3vw, 3.7rem); line-height: 1.03;
+  font-size: 3.7rem; line-height: 1.03;
   letter-spacing: -.025em; margin: 0; color: var(--ink);
 }
 .lede {
-  font-size: clamp(1.2rem, 1.8vw, 1.32rem); color: var(--ink-soft);
+  font-size: 1.32rem; color: var(--ink-soft);
   margin: 0; max-width: 64ch;
 }
 .hero-figure { margin: 0; width: 100%; display: flex; justify-content: center; min-height: 0; }
 .hero-figure img {
-  width: auto; max-width: min(1180px, 96vw);
-  max-height: min(58vh, 672px);
+  width: auto; max-width: 100%;
+  max-height: 672px;
   height: auto; border-radius: 12px;
   border: 1px solid var(--line);
   box-shadow: 0 20px 50px rgba(15, 23, 42, .14);
@@ -199,18 +198,21 @@ main { flex: 1 0 auto; display: flex; }
 .js .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .js .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
 
-/* ---------------- Responsive ---------------- */
+/* ---------------- Responsive ----------------
+   On phones we don't scale the fixed desktop layout down to a sliver; instead
+   the hero goes fluid/full-width and the page scrolls normally. script.js skips
+   the scale-to-fit transform below 640px. */
 @media (max-width: 640px) {
-  .hero { min-height: 0; justify-content: flex-start; padding-top: 18px; }
+  main { align-items: flex-start; }
+  .stage { width: 100% !important; height: auto !important; transform: none !important; }
+  .hero {
+    width: 100%; padding: 18px 20px 24px; transform: none !important;
+    justify-content: flex-start; gap: 16px;
+  }
+  .hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
+  .lede { font-size: 1.02rem; }
   .hero-figure img { max-height: none; }
   .download-buttons { flex-direction: column; width: 100%; max-width: 320px; }
   .btn { justify-content: center; }
   .download-meta { padding-left: 0; border-left: none; }
-}
-
-/* Short viewports (small laptops): keep everything on one screen by
-   trimming the screenshot further rather than forcing a scroll. */
-@media (min-width: 641px) and (max-height: 760px) {
-  .hero-figure img { max-height: 38vh; }
-  .lede { font-size: 1rem; }
 }

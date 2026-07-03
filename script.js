@@ -20,6 +20,56 @@ window.addEventListener("load", () => {
   }, 700);
 });
 
+// ---- Scale-to-fit hero ----
+// The hero is a fixed-size design; we scale it uniformly (transform: scale) so
+// the layout looks IDENTICAL at every monitor resolution — it never reflows or
+// changes proportion, it just scales as a whole to fit the viewport, so the
+// whole hero (title through the download counter) is always fully on screen.
+function fitStage() {
+  const stage = document.querySelector(".stage");
+  const hero = document.querySelector(".hero");
+  if (!stage || !hero) return;
+
+  if (window.innerWidth <= 640) {
+    // Phones: no scaling — CSS switches the hero to a fluid, scrolling layout.
+    hero.style.transform = "none";
+    stage.style.width = "";
+    stage.style.height = "";
+    return;
+  }
+
+  const header = document.querySelector(".site-header");
+  const footer = document.querySelector(".site-footer");
+
+  // Reset to measure the natural (unscaled) size.
+  hero.style.transform = "none";
+  const natW = hero.offsetWidth;
+  const natH = hero.offsetHeight;
+  if (!natW || !natH) return;
+
+  const headerH = header ? header.offsetHeight : 0;
+  const footerH = footer ? footer.offsetHeight : 0;
+  const availW = document.documentElement.clientWidth - 32;
+  const availH = window.innerHeight - headerH - footerH - 16;
+
+  // Never scale above 1 (keep the tuned design's size); shrink to fit smaller
+  // viewports so the proportions stay constant everywhere.
+  const scale = Math.max(0.1, Math.min(1, availW / natW, availH / natH));
+  hero.style.transform = "scale(" + scale + ")";
+  stage.style.width = Math.ceil(natW * scale) + "px";
+  stage.style.height = Math.ceil(natH * scale) + "px";
+}
+
+window.addEventListener("resize", fitStage);
+window.addEventListener("load", fitStage);
+document.addEventListener("DOMContentLoaded", fitStage);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitStage);
+(function () {
+  const heroImg = document.querySelector(".hero-figure img");
+  if (heroImg && !heroImg.complete) heroImg.addEventListener("load", fitStage);
+})();
+fitStage();
+
 // ---- Download counter ----
 // The counter reflects how many times the installer has been downloaded, with a
 // one-count-per-computer limit. A shared tally is kept by a lightweight public
@@ -112,6 +162,7 @@ if (macToggle && macHelp) {
     if (willOpen) macHelp.removeAttribute("hidden");
     else macHelp.setAttribute("hidden", "");
     macToggle.setAttribute("aria-expanded", String(willOpen));
+    fitStage();
   });
 }
 
